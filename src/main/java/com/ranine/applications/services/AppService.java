@@ -23,4 +23,5 @@ public interface AppService {
 	List<Application> findByEditeurIdEdit (Long id);
 	List<Application> findByOrderByNomAppAsc();
 	List<Application> trierApplicationsNomsNbtl ();
+	List<Editeur> getAllEditeurs();
 }

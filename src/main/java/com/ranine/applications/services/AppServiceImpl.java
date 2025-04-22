@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ranine.applications.entities.Application;
 import com.ranine.applications.entities.Editeur;
 import com.ranine.applications.repos.AppRepository;
+import com.ranine.applications.repos.EditeurRepository;
 
 @Service
 public class AppServiceImpl implements AppService{
@@ -17,6 +18,9 @@ public class AppServiceImpl implements AppService{
 	@Autowired
 	AppRepository appRepository;
 	
+	@Autowired
+	EditeurRepository editRepository;
+
 	@Override
 	public Application saveApp(Application a) {
 		return appRepository.save(a);
@@ -87,6 +91,11 @@ public class AppServiceImpl implements AppService{
 	@Override
 	public List<Application> trierApplicationsNomsNbtl() {
 		return appRepository.trierApplicationsNomsNbtl();
+	}
+
+	@Override
+	public List<Editeur> getAllEditeurs() {
+		return editRepository.findAll();
 	}
 
 }

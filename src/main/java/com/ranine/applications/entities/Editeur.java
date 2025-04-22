@@ -29,30 +29,7 @@ public class Editeur {
 	@OneToMany (mappedBy="editeur")
 	private List<Application> applications;
 	
-	public Long getIdEdit() {
-		return idEdit;
-	}
-	public void setIdEdit(Long idEdit) {
-		this.idEdit = idEdit;
-	}
-	public String getNomEdit() {
-		return nomEdit;
-	}
-	public void setNomEdit(String nomEdit) {
-		this.nomEdit = nomEdit;
-	}
-	public String getAdresseEdit() {
-		return adresseEdit;
-	}
-	public void setAdresseEdit(String adresseEdit) {
-		this.adresseEdit = adresseEdit;
-	}
-	public List<Application> getApplications() {
-		return applications;
-	}
-	public void setApplications(List<Application> applications) {
-		this.applications = applications;
-	}
+	
 	
 	
 }

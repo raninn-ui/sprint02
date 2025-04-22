@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<head>
+	<meta charset="utf-8">
+	<title>Ajout des Applications</title>
+</head>
+
+<body>
+	<div th:replace="template"></div>
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header" th:if="${mode=='new'}"> Ajout des Applications </div>
+			<div class="card-header" th:if="${mode=='edit'}">Modification des Applications </div>
+			<div class="card-body">
+				<form th:object="${application}" th:action="@{saveApplication}" method="post">
+					
+					<input type="hidden" name="page" class="form-control" th:value="${currentPage}" />
+					<input type="hidden"name="size" class="form-control" th:value="${size}" />
+					<div class="form-group">
+						<label class="control-label" hidden>ID Application :</label>
+						<input type="hidden" name="idApp" class="form-control" th:field="*{idApp}" />
+					</div>
+					<div class="form-group">
+						<label class="control-label">Nom Application :</label>
+						<input type="text" name="nomApp" class="form-control" th:field="*{nomApp}" />
+						<span th:errors=${application.nomApp} class="text-danger"> </span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Nombre de telechargement de l'application :</label>
+						<input type="text" name="nbtl" class="form-control" th:field="*{nbtl}" />
+						<span th:errors=${application.nbtl} class="text-danger"> </span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Release date :</label>
+						<input type="date" name="releasedate" class="form-control" th:field="*{releasedate}" />
+						<span th:errors=${application.releasedate} class="text-danger"> </span>
+					</div>
+					<div class="form-group">
+					<label class="control-label">Editeur :</label>
+					<select name="editeur" class="form-control"
+					th:value="${application.editeur.idEdit}"
+					th:if="${!#strings.isEmpty(application.editeur)}" >
+					<option th:each="e:${editeurs}" th:if="${mode=='edit'}"
+					 th:value="${e.idEdit}" th:text="${e.nomEdit}"
+					 th:selected="${ e.idEdit==application.editeur.idEdit}">
+					</option>
+					</select>
+					<!-- s'il s'agit d'un ajout (mode==new) ou d'une modification d'un produit ayant une catégorie null -->
+					<select name="editeur" class="form-control"
+					th:if="${#strings.isEmpty(application.editeur)}">
+					<option th:each="e:${editeurs}" th:value="${e.idEdit}"
+					th:text="${e.nomEdit}">
+					</option>
+					</select>
+					</div>
+					<div>
+						<button type="submit" class="btn btn-primary">Valider</button>
+					</div>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
